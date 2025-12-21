@@ -129,6 +129,43 @@ gpu_kernel_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpu_kernel_test.dir/build.make CMakeFiles/gpu_kernel_test.dir/build
 .PHONY : gpu_kernel_test/fast
 
+#=============================================================================
+# Target rules for targets named comprehensive_bench
+
+# Build rule for target.
+comprehensive_bench: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 comprehensive_bench
+.PHONY : comprehensive_bench
+
+# fast build rule for target.
+comprehensive_bench/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/comprehensive_bench.dir/build.make CMakeFiles/comprehensive_bench.dir/build
+.PHONY : comprehensive_bench/fast
+
+basic/comprehensive_bench.o: basic/comprehensive_bench.cpp.o
+.PHONY : basic/comprehensive_bench.o
+
+# target to build an object file
+basic/comprehensive_bench.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/comprehensive_bench.dir/build.make CMakeFiles/comprehensive_bench.dir/basic/comprehensive_bench.cpp.o
+.PHONY : basic/comprehensive_bench.cpp.o
+
+basic/comprehensive_bench.i: basic/comprehensive_bench.cpp.i
+.PHONY : basic/comprehensive_bench.i
+
+# target to preprocess a source file
+basic/comprehensive_bench.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/comprehensive_bench.dir/build.make CMakeFiles/comprehensive_bench.dir/basic/comprehensive_bench.cpp.i
+.PHONY : basic/comprehensive_bench.cpp.i
+
+basic/comprehensive_bench.s: basic/comprehensive_bench.cpp.s
+.PHONY : basic/comprehensive_bench.s
+
+# target to generate assembly for a file
+basic/comprehensive_bench.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/comprehensive_bench.dir/build.make CMakeFiles/comprehensive_bench.dir/basic/comprehensive_bench.cpp.s
+.PHONY : basic/comprehensive_bench.cpp.s
+
 basic/gpu_kernel_test.o: basic/gpu_kernel_test.cpp.o
 .PHONY : basic/gpu_kernel_test.o
 
@@ -161,7 +198,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... comprehensive_bench"
 	@echo "... gpu_kernel_test"
+	@echo "... basic/comprehensive_bench.o"
+	@echo "... basic/comprehensive_bench.i"
+	@echo "... basic/comprehensive_bench.s"
 	@echo "... basic/gpu_kernel_test.o"
 	@echo "... basic/gpu_kernel_test.i"
 	@echo "... basic/gpu_kernel_test.s"

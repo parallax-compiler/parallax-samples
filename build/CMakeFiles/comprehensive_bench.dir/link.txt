@@ -1,0 +1,1 @@
+/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/comprehensive_bench.dir/basic/comprehensive_bench.cpp.o -o comprehensive_bench  -Wl,-rpath,/Users/karthikt/parallax-base/parallax-runtime/build /Users/karthikt/parallax-base/parallax-runtime/build/libparallax-runtime.dylib /opt/homebrew/lib/libvulkan.dylib

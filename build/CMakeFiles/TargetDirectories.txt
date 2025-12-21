@@ -1,3 +1,4 @@
 /Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/gpu_kernel_test.dir
+/Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/comprehensive_bench.dir
 /Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/edit_cache.dir
 /Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/rebuild_cache.dir

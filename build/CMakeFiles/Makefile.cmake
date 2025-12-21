@@ -60,4 +60,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/gpu_kernel_test.dir/DependInfo.cmake"
+  "CMakeFiles/comprehensive_bench.dir/DependInfo.cmake"
   )

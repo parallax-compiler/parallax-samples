@@ -15,3 +15,7 @@ include_directories(${Vulkan_INCLUDE_DIRS})
 # GPU kernel test
 add_executable(gpu_kernel_test basic/gpu_kernel_test.cpp)
 target_link_libraries(gpu_kernel_test ${PARALLAX_RUNTIME} ${Vulkan_LIBRARIES})
+
+# Comprehensive benchmark
+add_executable(comprehensive_bench basic/comprehensive_bench.cpp)
+target_link_libraries(comprehensive_bench ${PARALLAX_RUNTIME} ${Vulkan_LIBRARIES})
