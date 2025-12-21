@@ -12,12 +12,14 @@
 #include <iomanip>
 #include <cmath>
 
+#include <parallax/runtime.hpp>
+
 // Full pipeline test: pSTL → ExecutionPolicyImpl → LambdaCompiler → SPIR-V → GPU
 // NO pre-compiled shaders!
 
-// Globals for runtime components
-std::unique_ptr<parallax::VulkanBackend> g_backend;
-std::unique_ptr<parallax::MemoryManager> g_memory_manager;
+// We use the shared runtime components from the library
+// static std::unique_ptr<parallax::VulkanBackend> g_backend;
+// static std::unique_ptr<parallax::MemoryManager> g_memory_manager;
 
 struct BenchConfig {
     size_t size;
@@ -191,27 +193,18 @@ int main() {
     std::cout << "========================================" << std::endl;
     std::cout << std::endl;
     
-    // Initialize Parallax
-    try {
-        g_backend = std::make_unique<parallax::VulkanBackend>();
-        if (!g_backend->initialize()) {
-            throw std::runtime_error("Failed to initialize VulkanBackend");
-        }
-        g_memory_manager = std::make_unique<parallax::MemoryManager>(g_backend.get());
-    } catch (const std::exception& e) {
-        std::cerr << "Initialization Failed: " << e.what() << std::endl;
+    // Initialize Parallax (via shared runtime)
+    auto* backend = parallax::get_global_backend();
+    auto* memory_manager = parallax::get_global_memory_manager();
+    if (!backend || !memory_manager) {
+        std::cerr << "Initialization Failed" << std::endl;
         return 1;
     }
 
-    if (!g_backend || !g_memory_manager) {
-        std::cerr << "ERROR: Parallax runtime not initialized" << std::endl;
-        return 1;
-    }
-    
     // Initialize execution policy with backend
-    parallax::ExecutionPolicyImpl::instance().initialize(g_backend.get(), g_memory_manager.get());
+    parallax::ExecutionPolicyImpl::instance().initialize(backend, memory_manager);
     
-    std::cout << "Parallax initialized on: " << g_backend->device_name() << std::endl;
+    std::cout << "Parallax initialized on: " << backend->device_name() << std::endl;
     std::cout << std::endl;
     
     std::vector<BenchConfig> configs = {
