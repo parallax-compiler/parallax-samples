@@ -11,6 +11,12 @@ find_package(Vulkan REQUIRED)
 find_library(PARALLAX_RUNTIME parallax-runtime PATHS ${CMAKE_SOURCE_DIR}/../parallax-runtime/build)
 find_library(PARALLAX_COMPILER parallax-plugin PATHS ${CMAKE_SOURCE_DIR}/../parallax-compiler/build)
 
+# Find LLVM (needed for compiler samples)
+find_package(LLVM REQUIRED CONFIG)
+include_directories(${LLVM_INCLUDE_DIRS})
+link_directories(${LLVM_LIBRARY_DIRS})
+add_definitions(${LLVM_DEFINITIONS})
+
 include_directories(${CMAKE_SOURCE_DIR}/../parallax-runtime/include)
 include_directories(${CMAKE_SOURCE_DIR}/../parallax-compiler/include)
 include_directories(${Vulkan_INCLUDE_DIRS})
@@ -26,13 +32,33 @@ target_link_libraries(comprehensive_bench ${PARALLAX_RUNTIME} ${Vulkan_LIBRARIES
 # Automatic lambda compilation benchmark (full pipeline test)
 if(PARALLAX_COMPILER)
     add_executable(auto_lambda_bench basic/auto_lambda_bench.cpp)
-    target_link_libraries(auto_lambda_bench 
-        ${PARALLAX_RUNTIME} 
-        ${PARALLAX_COMPILER} 
-        ${Vulkan_LIBRARIES})
+    
+    # Handle LLVM 21+ monolithic library
+    if(LLVM_PACKAGE_VERSION VERSION_GREATER_EQUAL "21.0")
+        target_link_libraries(auto_lambda_bench 
+            ${PARALLAX_RUNTIME} 
+            ${PARALLAX_COMPILER} 
+            ${Vulkan_LIBRARIES}
+            LLVM)
+    else()
+        llvm_map_components_to_libnames(llvm_libs support core irreader)
+        target_link_libraries(auto_lambda_bench 
+            ${PARALLAX_RUNTIME} 
+            ${PARALLAX_COMPILER} 
+            ${Vulkan_LIBRARIES}
+            ${llvm_libs})
+    endif()
         
     # Simpler compiler-only test (no runtime integration needed)
     add_executable(compiler_test basic/compiler_test.cpp)
-    target_link_libraries(compiler_test 
-        ${PARALLAX_COMPILER})
+    
+    if(LLVM_PACKAGE_VERSION VERSION_GREATER_EQUAL "21.0")
+        target_link_libraries(compiler_test 
+            ${PARALLAX_COMPILER}
+            LLVM)
+    else()
+        target_link_libraries(compiler_test 
+            ${PARALLAX_COMPILER}
+            ${llvm_libs})
+    endif()
 endif()
