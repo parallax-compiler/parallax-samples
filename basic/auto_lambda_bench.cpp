@@ -193,7 +193,7 @@ int main() {
     
     // Initialize Parallax
     try {
-        g_backend = std::make_unique<parallax::VulkanBackend>(0);
+        g_backend = std::make_unique<parallax::VulkanBackend>();
         g_memory_manager = std::make_unique<parallax::MemoryManager>(g_backend.get());
     } catch (const std::exception& e) {
         std::cerr << "Initialization Failed: " << e.what() << std::endl;
