@@ -15,8 +15,9 @@
 // Full pipeline test: pSTL → ExecutionPolicyImpl → LambdaCompiler → SPIR-V → GPU
 // NO pre-compiled shaders!
 
-extern std::unique_ptr<parallax::VulkanBackend> g_backend;
-extern std::unique_ptr<parallax::MemoryManager> g_memory_manager;
+// Globals for runtime components
+std::unique_ptr<parallax::VulkanBackend> g_backend;
+std::unique_ptr<parallax::MemoryManager> g_memory_manager;
 
 struct BenchConfig {
     size_t size;
@@ -191,6 +192,14 @@ int main() {
     std::cout << std::endl;
     
     // Initialize Parallax
+    try {
+        g_backend = std::make_unique<parallax::VulkanBackend>(0);
+        g_memory_manager = std::make_unique<parallax::MemoryManager>(g_backend.get());
+    } catch (const std::exception& e) {
+        std::cerr << "Initialization Failed: " << e.what() << std::endl;
+        return 1;
+    }
+
     if (!g_backend || !g_memory_manager) {
         std::cerr << "ERROR: Parallax runtime not initialized" << std::endl;
         return 1;
