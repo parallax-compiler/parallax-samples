@@ -1,4 +1,5 @@
 #include <parallax/execution_policy.hpp>
+#include <parallax/execution_policy_impl.hpp> // Includes template definitions
 #include <parallax/lambda_compiler.hpp>
 #include <parallax/runtime.h>
 #include <parallax/vulkan_backend.hpp>
