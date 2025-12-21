@@ -1,0 +1,7 @@
+/Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/vector_multiply.dir
+/Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/edit_cache.dir
+/Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/rebuild_cache.dir
+/Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/list_install_components.dir
+/Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/install.dir
+/Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/install/local.dir
+/Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles/install/strip.dir
