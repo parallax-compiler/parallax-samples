@@ -253,5 +253,8 @@ int main() {
     std::cout << "No pre-compiled shaders used." << std::endl;
     std::cout << "========================================" << std::endl;
     
+    // Cleanup
+    parallax::ExecutionPolicyImpl::instance().shutdown();
+    
     return 0;
 }
