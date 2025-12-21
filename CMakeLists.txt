@@ -8,7 +8,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Vulkan REQUIRED)
 
 # Find parallax-runtime and parallax-compiler
-find_library(PARALLAX_RUNTIME parallax-runtime PATHS ${CMAKE_SOURCE_DIR}/../parallax-runtime/build)
+find_library(PARALLAX_RUNTIME parallax-runtime
+    PATHS
+        ${CMAKE_CURRENT_SOURCE_DIR}/../parallax-runtime/build
+        ${CMAKE_CURRENT_SOURCE_DIR}/../parallax-runtime/build/lib
+)
 find_library(PARALLAX_COMPILER parallax-plugin PATHS ${CMAKE_SOURCE_DIR}/../parallax-compiler/build)
 
 # Find LLVM (needed for compiler samples)
