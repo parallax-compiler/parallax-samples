@@ -85,51 +85,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/opt/homebrew/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/opt/homebrew/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/karthikt/parallax-base/parallax-samples/build/CMakeFiles /Users/karthikt/parallax-base/parallax-samples/build//CMakeFiles/progress.marks
@@ -162,41 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named vector_multiply
+# Target rules for targets named gpu_kernel_test
 
 # Build rule for target.
-vector_multiply: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vector_multiply
-.PHONY : vector_multiply
+gpu_kernel_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gpu_kernel_test
+.PHONY : gpu_kernel_test
 
 # fast build rule for target.
-vector_multiply/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vector_multiply.dir/build.make CMakeFiles/vector_multiply.dir/build
-.PHONY : vector_multiply/fast
+gpu_kernel_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpu_kernel_test.dir/build.make CMakeFiles/gpu_kernel_test.dir/build
+.PHONY : gpu_kernel_test/fast
 
-basic/vector_multiply.o: basic/vector_multiply.cpp.o
-.PHONY : basic/vector_multiply.o
+basic/gpu_kernel_test.o: basic/gpu_kernel_test.cpp.o
+.PHONY : basic/gpu_kernel_test.o
 
 # target to build an object file
-basic/vector_multiply.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vector_multiply.dir/build.make CMakeFiles/vector_multiply.dir/basic/vector_multiply.cpp.o
-.PHONY : basic/vector_multiply.cpp.o
+basic/gpu_kernel_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpu_kernel_test.dir/build.make CMakeFiles/gpu_kernel_test.dir/basic/gpu_kernel_test.cpp.o
+.PHONY : basic/gpu_kernel_test.cpp.o
 
-basic/vector_multiply.i: basic/vector_multiply.cpp.i
-.PHONY : basic/vector_multiply.i
+basic/gpu_kernel_test.i: basic/gpu_kernel_test.cpp.i
+.PHONY : basic/gpu_kernel_test.i
 
 # target to preprocess a source file
-basic/vector_multiply.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vector_multiply.dir/build.make CMakeFiles/vector_multiply.dir/basic/vector_multiply.cpp.i
-.PHONY : basic/vector_multiply.cpp.i
+basic/gpu_kernel_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpu_kernel_test.dir/build.make CMakeFiles/gpu_kernel_test.dir/basic/gpu_kernel_test.cpp.i
+.PHONY : basic/gpu_kernel_test.cpp.i
 
-basic/vector_multiply.s: basic/vector_multiply.cpp.s
-.PHONY : basic/vector_multiply.s
+basic/gpu_kernel_test.s: basic/gpu_kernel_test.cpp.s
+.PHONY : basic/gpu_kernel_test.s
 
 # target to generate assembly for a file
-basic/vector_multiply.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vector_multiply.dir/build.make CMakeFiles/vector_multiply.dir/basic/vector_multiply.cpp.s
-.PHONY : basic/vector_multiply.cpp.s
+basic/gpu_kernel_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpu_kernel_test.dir/build.make CMakeFiles/gpu_kernel_test.dir/basic/gpu_kernel_test.cpp.s
+.PHONY : basic/gpu_kernel_test.cpp.s
 
 # Help Target
 help:
@@ -205,15 +160,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... install"
-	@echo "... install/local"
-	@echo "... install/strip"
-	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... vector_multiply"
-	@echo "... basic/vector_multiply.o"
-	@echo "... basic/vector_multiply.i"
-	@echo "... basic/vector_multiply.s"
+	@echo "... gpu_kernel_test"
+	@echo "... basic/gpu_kernel_test.o"
+	@echo "... basic/gpu_kernel_test.i"
+	@echo "... basic/gpu_kernel_test.s"
 .PHONY : help
 
 
