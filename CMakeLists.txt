@@ -23,6 +23,16 @@ target_link_libraries(gpu_kernel_test ${PARALLAX_RUNTIME} ${Vulkan_LIBRARIES})
 add_executable(comprehensive_bench basic/comprehensive_bench.cpp)
 target_link_libraries(comprehensive_bench ${PARALLAX_RUNTIME} ${Vulkan_LIBRARIES})
 
-# Execution policy test
-add_executable(execution_policy_test basic/execution_policy_test.cpp)
-target_link_libraries(execution_policy_test ${PARALLAX_RUNTIME} ${PARALLAX_COMPILER} ${Vulkan_LIBRARIES})
+# Automatic lambda compilation benchmark (full pipeline test)
+if(PARALLAX_COMPILER)
+    add_executable(auto_lambda_bench basic/auto_lambda_bench.cpp)
+    target_link_libraries(auto_lambda_bench 
+        ${PARALLAX_RUNTIME} 
+        ${PARALLAX_COMPILER} 
+        ${Vulkan_LIBRARIES})
+        
+    # Simpler compiler-only test (no runtime integration needed)
+    add_executable(compiler_test basic/compiler_test.cpp)
+    target_link_libraries(compiler_test 
+        ${PARALLAX_COMPILER})
+endif()

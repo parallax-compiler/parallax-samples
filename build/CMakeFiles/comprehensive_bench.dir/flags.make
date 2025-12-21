@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/karthikt/parallax-base/parallax-samples/../parallax-runtime/include -I/opt/homebrew/include
+CXX_INCLUDES = -I/Users/karthikt/parallax-base/parallax-samples/../parallax-runtime/include -I/Users/karthikt/parallax-base/parallax-samples/../parallax-compiler/include -I/opt/homebrew/include
 
 CXX_FLAGSarm64 = -std=gnu++20 -arch arm64
 
