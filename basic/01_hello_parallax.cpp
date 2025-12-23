@@ -4,26 +4,29 @@
  *
  * Demonstrates the simplest possible use of Parallax to offload
  * a std::for_each operation to the GPU.
+ *
+ * NEW in v1.0: No custom allocator needed! Compiler automatically
+ * injects GPU-accessible memory allocators. Pure ISO C++20!
  */
 
 #include <vector>
 #include <algorithm>
 #include <execution>
 #include <iostream>
-#include <parallax/allocator.hpp>
 
 int main() {
-    std::cout << "=== Parallax Hello World ===" << std::endl;
-    std::cout << "Creating GPU-accessible vector..." << std::endl;
+    std::cout << "=== Parallax Hello World (v1.0) ===" << std::endl;
+    std::cout << "Creating standard C++ vector..." << std::endl;
 
-    // Create vector with parallax::allocator for GPU access
+    // Standard C++ vector - compiler auto-injects GPU allocator!
     constexpr size_t N = 1000;
-    std::vector<float, parallax::allocator<float>> data(N, 1.0f);
+    std::vector<float> data(N, 1.0f);
 
     std::cout << "Before: data[0] = " << data[0] << std::endl;
 
     // Run on GPU with std::execution::par
     // Lambda will be automatically compiled to GPU kernel
+    // Memory is automatically made GPU-accessible by the compiler!
     std::for_each(std::execution::par, data.begin(), data.end(),
                  [](float& x) {
                      x = x * 2.0f;

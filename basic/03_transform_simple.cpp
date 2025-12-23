@@ -1,6 +1,9 @@
 /**
  * @file 03_transform_simple.cpp
  * @brief Simple std::transform examples with return values
+ *
+ * NEW in v1.0: Uses standard C++ containers with automatic GPU
+ * allocator injection. No custom allocators needed!
  */
 
 #include <vector>
@@ -8,7 +11,6 @@
 #include <execution>
 #include <iostream>
 #include <iomanip>
-#include <parallax/allocator.hpp>
 
 void print_test(const char* name, float expected, float actual) {
     bool pass = (expected == actual);
@@ -26,8 +28,8 @@ int main() {
 
     // Test 1: Simple multiply
     {
-        std::vector<float, parallax::allocator<float>> input(N, 3.0f);
-        std::vector<float, parallax::allocator<float>> output(N);
+        std::vector<float> input(N, 3.0f);    // Standard C++!
+        std::vector<float> output(N);         // Standard C++!
 
         std::transform(std::execution::par,
                       input.begin(), input.end(), output.begin(),
@@ -40,8 +42,8 @@ int main() {
 
     // Test 2: Complex expression
     {
-        std::vector<float, parallax::allocator<float>> input(N, 3.0f);
-        std::vector<float, parallax::allocator<float>> output(N);
+        std::vector<float> input(N, 3.0f);    // Standard C++!
+        std::vector<float> output(N);         // Standard C++!
 
         std::transform(std::execution::par,
                       input.begin(), input.end(), output.begin(),
@@ -54,8 +56,8 @@ int main() {
 
     // Test 3: Division
     {
-        std::vector<float, parallax::allocator<float>> input(N, 10.0f);
-        std::vector<float, parallax::allocator<float>> output(N);
+        std::vector<float> input(N, 10.0f);   // Standard C++!
+        std::vector<float> output(N);         // Standard C++!
 
         std::transform(std::execution::par,
                       input.begin(), input.end(), output.begin(),
@@ -68,8 +70,8 @@ int main() {
 
     // Test 4: Subtraction
     {
-        std::vector<float, parallax::allocator<float>> input(N, 10.0f);
-        std::vector<float, parallax::allocator<float>> output(N);
+        std::vector<float> input(N, 10.0f);   // Standard C++!
+        std::vector<float> output(N);         // Standard C++!
 
         std::transform(std::execution::par,
                       input.begin(), input.end(), output.begin(),

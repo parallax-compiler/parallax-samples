@@ -1,6 +1,9 @@
 /**
  * @file 02_for_each_simple.cpp
  * @brief Simple std::for_each examples with various lambda patterns
+ *
+ * NEW in v1.0: Uses standard C++ containers with automatic GPU
+ * allocator injection. No custom allocators needed!
  */
 
 #include <vector>
@@ -8,7 +11,6 @@
 #include <execution>
 #include <iostream>
 #include <iomanip>
-#include <parallax/allocator.hpp>
 
 void print_test(const char* name, float expected, float actual) {
     bool pass = (expected == actual);
@@ -26,7 +28,7 @@ int main() {
 
     // Test 1: Multiply
     {
-        std::vector<float, parallax::allocator<float>> data(N, 5.0f);
+        std::vector<float> data(N, 5.0f);  // Standard C++!
         std::for_each(std::execution::par, data.begin(), data.end(),
                      [](float& x) { x *= 2.0f; });
         print_test("Multiply (*=)", 10.0f, data[0]);
@@ -36,7 +38,7 @@ int main() {
 
     // Test 2: Add
     {
-        std::vector<float, parallax::allocator<float>> data(N, 5.0f);
+        std::vector<float> data(N, 5.0f);  // Standard C++!
         std::for_each(std::execution::par, data.begin(), data.end(),
                      [](float& x) { x += 3.0f; });
         print_test("Add (+=)", 8.0f, data[0]);
@@ -46,7 +48,7 @@ int main() {
 
     // Test 3: Complex expression
     {
-        std::vector<float, parallax::allocator<float>> data(N, 2.0f);
+        std::vector<float> data(N, 2.0f);  // Standard C++!
         std::for_each(std::execution::par, data.begin(), data.end(),
                      [](float& x) { x = x * 3.0f + 1.0f; });
         print_test("Complex (x*3+1)", 7.0f, data[0]);
@@ -56,7 +58,7 @@ int main() {
 
     // Test 4: Division
     {
-        std::vector<float, parallax::allocator<float>> data(N, 10.0f);
+        std::vector<float> data(N, 10.0f);  // Standard C++!
         std::for_each(std::execution::par, data.begin(), data.end(),
                      [](float& x) { x /= 2.0f; });
         print_test("Divide (/=)", 5.0f, data[0]);
